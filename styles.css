@@ -28,6 +28,7 @@ body {
   display: flex;
   justify-content: center;
   padding: 5px 0;
+  z-index: 1;
 }
 
 .nav-wrapper {
@@ -53,6 +54,13 @@ body {
   cursor: pointer;
   margin: 0 10px;
   display: inline-block;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+}
+
+.icon:focus{
+  outline: none !important;
 }
 
 .user-profile {
@@ -187,7 +195,7 @@ body {
   border: none;
 }
 
-.post-image {
+.post-image, .post-image-wrapper {
   width: 100%;
   height: 500px;
   object-fit: cover;
@@ -360,7 +368,7 @@ body {
   }
 }
 
-.like:active, .like:target {
+.liked {
   -webkit-animation-duration: 0.45s;
   animation-duration: 450ms;
   -webkit-animation-name: like-button-animation;
@@ -371,6 +379,71 @@ body {
   transform: scale(1);
   color: #ed4956;
   fill: #ed4956;
+}
+
+#altTextOverlay {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #000000;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  animation-name: altTextAnimation;
+  animation-duration: 5s;
+  animation-delay: 3s;
+  animation-fill-mode: forwards;
+}
+
+#altTextText {
+  text-align: justify;
+  font-weight: 800;
+  font-size: 2em;
+  max-width: calc(100vw - 20vw);
+}
+
+@keyframes altTextAnimation {
+  0% {
+    color: black;
+  }
+  50% {
+    color:white;
+  }
+  100%{
+    color:white;
+  }
+}
+
+.post-image-wrapper{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+
+#crop .post-image-wrapper img{
+  object-fit: cover;
+  object-position: center bottom;
+}
+
+.zoomOut {
+  animation-name: cropZoom;
+  animation-duration: 5s;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes cropZoom {
+  from {
+    object-position: center bottom;
+  }
+  to {
+    object-position: center center;
+    width: 25%;
+  }
 }
 
 
@@ -397,7 +470,7 @@ body {
   .main {
     padding: 0;
   }
-  .post-image {
+  .post-image, .post-image-wrapper {
     height: 300px;
   }
   .post {
