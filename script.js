@@ -2,8 +2,10 @@ const altTextPost = document.getElementById("altText")
 const skinPost = document.getElementById("skin")
 const cropPost = document.getElementById("crop")
 const overlay = document.getElementById("altTextOverlay");
+const saveButton = document.querySelectorAll(".save");
 
-
+// Function handling optics of like and dislike and subsequently calling
+// the respective handlers passed for the post passed
 function likingDisliking (postSelector, e, likeHandler, dislikeHandler) {
 
     e.stopPropagation()
@@ -19,6 +21,10 @@ function likingDisliking (postSelector, e, likeHandler, dislikeHandler) {
         likeSVG.innerHTML = pathItem;
         
         likeSVG.setAttribute("viewBox", "0 0 48 48");
+
+        likeCount = parseInt(postSelector.querySelector(".likes").innerHTML.replace(',','').split(" ")[0])
+
+        postSelector.querySelector(".likes").innerHTML = "" + (likeCount + 1).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " likes";
         
         likeSVG.classList.add("liked");
 
@@ -31,6 +37,10 @@ function likingDisliking (postSelector, e, likeHandler, dislikeHandler) {
         likeSVG.innerHTML = pathItem;
 
         likeSVG.setAttribute("viewBox", "0 0 24 24");
+
+        likeCount = parseInt(postSelector.querySelector(".likes").innerHTML.replace(',','').split(" ")[0])
+
+        postSelector.querySelector(".likes").innerHTML = "" + (likeCount - 1).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " likes";
         
         likeSVG.classList.remove("liked");
 
@@ -42,6 +52,7 @@ function likingDisliking (postSelector, e, likeHandler, dislikeHandler) {
     
 }
 
+// Function registering likingDisliking() when post is double tapped or clicked
 function addPostLikeListener(postSelector, likeHandler, dislikeHandler){
 
     likeSVG = postSelector.querySelector(".like")
@@ -73,6 +84,7 @@ function cropRemove(event){
     cropPost.querySelector(".post-image").classList.remove("zoomOut");
 }
 
+// Click listener to Animation End of AltTextPost
 overlay.onanimationend = e => {
 
     overlay.addEventListener('click', e => {
@@ -85,6 +97,29 @@ overlay.onanimationend = e => {
     
 }
 
+// Click Listeners for each save post icon
+saveButton.forEach(button => {
+    button.addEventListener('click', e => {
+        if (button.classList.toggle("saved")){
+            button.innerHTML = '<path d="M20 22a.999.999 0 01-.687-.273L12 14.815l-7.313 6.912A1 1 0 013 21V3a1 1 0 011-1h16a1 1 0 011 1v18a1 1 0 01-1 1z"></path>'
+        }
+        else {
+            button.innerHTML = '<polygon fill="none" points="20 21 12 13.44 4 21 4 3 20 3 20 21" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></polygon>'
+        }
+        e.stopPropagation()
+    });
+});
 
-addPostLikeListener(altTextPost, altText)
+
+shave('#altText .description-text', 40, { character: '... more' });
+const altTextCommentExpand = document.querySelector("#altText .js-shave-char")
+altTextCommentExpand.addEventListener('click', e => {
+    altTextCommentExpand.style.display = "none";
+    altTextCommentExpand.nextSibling.removeAttribute("style");
+    e.stopPropagation();
+})
+
+
+
+addPostLikeListener(altTextPost, altText, () => {})
 addPostLikeListener(cropPost, crop, cropRemove)

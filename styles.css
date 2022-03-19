@@ -164,6 +164,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
+  display: none;
 }
 
 .info .username {
@@ -214,11 +215,20 @@ body {
   margin: 10px 0;
   font-size: 14px;
   line-height: 20px;
+  /*display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; 
+  overflow: hidden; */
 }
 
-.description span {
+.description .description-user {
   font-weight: bold;
   margin-right: 10px;
+}
+
+.description .description-text .js-shave-char {
+  color: gray;
+  cursor: pointer;
 }
 
 .post-time {
@@ -236,7 +246,7 @@ body {
 }
 
 .comment-wrapper .icon {
-  height: 30px;
+  height: 20px;
 }
 
 .comment-box {
@@ -401,8 +411,8 @@ body {
 #altTextText {
   text-align: justify;
   font-weight: 800;
-  font-size: 2em;
-  max-width: calc(100vw - 20vw);
+  font-size: 2em; 
+  max-width: min(calc(100vw - 100px), 500px);
 }
 
 @keyframes altTextAnimation {
@@ -438,6 +448,9 @@ body {
 
 @keyframes cropZoom {
   from {
+    object-position: center bottom;
+  }
+  50% {
     object-position: center bottom;
   }
   to {
