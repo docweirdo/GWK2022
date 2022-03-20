@@ -66,7 +66,7 @@ body {
 .user-profile {
   width: 22px;
   border-radius: 50%;
-  background-image: url(img/profile-pic.png);
+  background-image: url(img/udk.png);
   background-size: cover;
 }
 
@@ -164,7 +164,6 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
-  display: none;
 }
 
 .info .username {
@@ -326,6 +325,10 @@ body {
   color: #000;
 }
 
+.profile-card .logged-in {
+  text-align: left;
+}
+
 .sub-text {
   color: rgba(0, 0, 0, 0.5);
   font-size: 12px;
@@ -436,7 +439,7 @@ body {
 
 #crop .post-image-wrapper img{
   object-fit: cover;
-  object-position: center bottom;
+  object-position: center 90%;
 }
 
 .zoomOut {
@@ -448,10 +451,10 @@ body {
 
 @keyframes cropZoom {
   from {
-    object-position: center bottom;
+    object-position: center 90%;
   }
   50% {
-    object-position: center bottom;
+    object-position: center 90%;
   }
   to {
     object-position: center center;
@@ -459,6 +462,42 @@ body {
   }
 }
 
+#skin .post-image-wrapper{
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#skin .post-image-wrapper svg{
+  position: absolute;
+  height: 24px;
+  color: white;
+  fill: white;
+  z-index: 10;
+}
+
+#skin .post-image {
+  object-fit: cover;
+  object-position: center 30%;
+  filter: blur(20px);
+}
+
+#skin .unblocked {
+  animation: unblock;
+  animation-duration: 2s;
+  animation-fill-mode: both;
+  animation-direction: normal;
+}
+
+@keyframes unblock {
+  from {
+    filter: blur(20px);
+  }
+  to {
+    filter: none;
+  }
+}
 
 
 @media only screen and (max-width: 1100px) {

@@ -59,7 +59,7 @@ function addPostLikeListener(postSelector, likeHandler, dislikeHandler){
     image = postSelector.querySelector(".post-image")
 
     likeSVG.addEventListener('click', e => likingDisliking(postSelector, e, likeHandler, dislikeHandler))
-    image.addEventListener('dblclick', e => likingDisliking(postSelector, e, likeHhandler, dislikeHandler))
+    image.addEventListener('dblclick', e => likingDisliking(postSelector, e, likeHandler, dislikeHandler))
 
 }
 
@@ -70,6 +70,18 @@ function altText(event){
     overlay.firstChild.id = "altTextText"
 
     document.body.style.overflow = "hidden";
+
+    // Click listener to Animation End of AltTextPost
+    overlay.addEventListener('animationend', e => {
+
+        overlay.addEventListener('click', e => {
+            
+            document.body.style.overflow = "visible";
+            overlay.style.display = "none"
+    
+        }, {'once': true});
+        
+    }, {'once': true});
 
 }
 
@@ -84,18 +96,40 @@ function cropRemove(event){
     cropPost.querySelector(".post-image").classList.remove("zoomOut");
 }
 
-// Click listener to Animation End of AltTextPost
-overlay.onanimationend = e => {
+function skin(event){
 
-    overlay.addEventListener('click', e => {
-        
-        document.body.style.overflow = "visible";
-        overlay.style.display = "none"
-
-        overlay.removeEventListener('click', this)
-    });
+    skinPostImage = skinPost.querySelector(".post-image")
     
+    skinPostImage.classList.add("unblocked");
+    skinPost.querySelector(".post-image-wrapper svg").style.display = 'none';
 }
+
+function skinRemove(event){
+
+    skinPostImage = skinPost.querySelector(".post-image")
+
+    skinPostImage.style.animationDirection = "reverse";
+    
+    newone = skinPostImage.cloneNode(true);
+    skinPostImage.parentNode.replaceChild(newone, skinPostImage);
+
+    skinPostImage = newone;
+
+    // Set doubletap event listener again because new node
+    skinPostImage.addEventListener('dblclick', e => likingDisliking(skinPost, e, skin, skinRemove))
+
+
+    // Add 'Blocked' svg at Animation End of SkinPost
+    skinPostImage.addEventListener('animationend', e => {
+        skinPost.querySelector(".post-image-wrapper svg").style.display = 'block';
+        skinPostImage.style.animationDirection = "normal";
+        skinPostImage.classList.remove("unblocked")
+    
+        e.stopPropagation();
+    }, {'once': true});
+
+}
+
 
 // Click Listeners for each save post icon
 saveButton.forEach(button => {
@@ -117,9 +151,18 @@ altTextCommentExpand.addEventListener('click', e => {
     altTextCommentExpand.style.display = "none";
     altTextCommentExpand.nextSibling.removeAttribute("style");
     e.stopPropagation();
-})
+}, {'once': true})
+
+shave('#crop .description-text', 40, { character: '... more' });
+const cropCommentExpand = document.querySelector("#crop .js-shave-char")
+cropCommentExpand.addEventListener('click', e => {
+    cropCommentExpand.style.display = "none";
+    cropCommentExpand.nextSibling.removeAttribute("style");
+    e.stopPropagation();
+}, {'once': true})
 
 
 
 addPostLikeListener(altTextPost, altText, () => {})
 addPostLikeListener(cropPost, crop, cropRemove)
+addPostLikeListener(skinPost, skin, skinRemove)
