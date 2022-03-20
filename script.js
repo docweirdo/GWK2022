@@ -1,6 +1,7 @@
-const altTextPost = document.getElementById("altText")
-const skinPost = document.getElementById("skin")
-const cropPost = document.getElementById("crop")
+const altTextPost = document.getElementById("altText");
+const skinPost = document.getElementById("skin");
+const cropPost = document.getElementById("crop");
+const nipplePost = document.getElementById("nipple");
 const overlay = document.getElementById("altTextOverlay");
 const saveButton = document.querySelectorAll(".save");
 
@@ -106,7 +107,7 @@ function skin(event){
 
 function skinRemove(event){
 
-    skinPostImage = skinPost.querySelector(".post-image")
+    skinPostImage = skinPost.querySelector(".post-image");
 
     skinPostImage.style.animationDirection = "reverse";
     
@@ -130,6 +131,68 @@ function skinRemove(event){
 
 }
 
+function nipple(e){
+
+    nippleFirstImage = nipplePost.querySelector(".post-image");
+
+    nippleFirstImage.classList.add("roll-out-first-nipple");
+    
+    nippleSecondImage = nipplePost.querySelector(".second-post-image");
+
+    nippleSecondImage.classList.add("roll-in-second-nipple");
+    nippleSecondImage.style.display = "block";
+    
+    nippleFirstImage.addEventListener('animationend', e => {
+        nippleFirstImage.style.display = "none";
+
+    }, {'once': true})
+}
+
+function nippleRemove(e){
+
+    nippleFirstImage = nipplePost.querySelector(".post-image");
+    nippleSecondImage = nipplePost.querySelector(".second-post-image");
+
+    nippleFirstImage.src = "img/posts/nipple_1.png";
+    nippleSecondImage.src = "img/posts/nipple_2.png";
+
+    newone = nippleFirstImage.cloneNode(true);
+    nippleFirstImage.parentNode.replaceChild(newone, nippleFirstImage);
+    nippleFirstImage = newone;
+
+    newtwo = nippleSecondImage.cloneNode(true);
+    nippleSecondImage.parentNode.replaceChild(newtwo, nippleSecondImage);
+    nippleSecondImage = newtwo;
+
+    nippleFirstImage.style.display = "block";
+
+    nipple(e)
+
+    nippleSecondImage.addEventListener('animationend', e => {
+
+        console.log("hello")
+
+        nippleFirstImage.classList.remove('roll-out-first-nipple')
+
+        newone = nippleFirstImage.cloneNode(true);
+        nippleFirstImage.parentNode.replaceChild(newone, nippleFirstImage);
+        nippleFirstImage = newone;
+
+        nippleSecondImage.classList.remove('roll-in-second-nipple')
+
+        newtwo = nippleSecondImage.cloneNode(true);
+        nippleSecondImage.parentNode.replaceChild(newtwo, nippleSecondImage);
+        nippleSecondImage = newtwo;
+
+        nippleFirstImage.src = "img/posts/nipple_2.png";
+        nippleSecondImage.src = "img/posts/nipple_1.png";
+
+        nippleFirstImage.style.display = "block";
+        nippleSecondImage.style.display = "none";
+
+    }, {'once': true});
+
+}
 
 // Click Listeners for each save post icon
 saveButton.forEach(button => {
@@ -168,3 +231,4 @@ descriptionTexts.forEach(dt => {
 addPostLikeListener(altTextPost, altText, () => {})
 addPostLikeListener(cropPost, crop, cropRemove)
 addPostLikeListener(skinPost, skin, skinRemove)
+addPostLikeListener(nipplePost, nipple, nippleRemove)
