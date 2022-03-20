@@ -57,7 +57,7 @@ function likingDisliking (postSelector, e, likeHandler, dislikeHandler) {
 function addPostLikeListener(postSelector, likeHandler, dislikeHandler){
 
     likeSVG = postSelector.querySelector(".like")
-    image = postSelector.querySelector(".post-image")
+    image = postSelector.querySelector(".post-image-wrapper") ? postSelector.querySelector(".post-image-wrapper") : postSelector.querySelector(".post-image");
 
     likeSVG.addEventListener('click', e => likingDisliking(postSelector, e, likeHandler, dislikeHandler))
     image.addEventListener('dblclick', e => likingDisliking(postSelector, e, likeHandler, dislikeHandler))
@@ -117,7 +117,7 @@ function skinRemove(event){
     skinPostImage = newone;
 
     // Set doubletap event listener again because new node
-    skinPostImage.addEventListener('dblclick', e => likingDisliking(skinPost, e, skin, skinRemove))
+    //skinPostImage.addEventListener('dblclick', e => likingDisliking(skinPost, e, skin, skinRemove))
 
 
     // Add 'Blocked' svg at Animation End of SkinPost
@@ -153,8 +153,8 @@ function nippleRemove(e){
     nippleFirstImage = nipplePost.querySelector(".post-image");
     nippleSecondImage = nipplePost.querySelector(".second-post-image");
 
-    nippleFirstImage.src = "img/posts/nipple_1.png";
-    nippleSecondImage.src = "img/posts/nipple_2.png";
+    nippleFirstImage.src = "img/posts/nipple_2.png";
+    nippleSecondImage.src = "img/posts/nipple_1.png";
 
     newone = nippleFirstImage.cloneNode(true);
     nippleFirstImage.parentNode.replaceChild(newone, nippleFirstImage);
@@ -166,11 +166,9 @@ function nippleRemove(e){
 
     nippleFirstImage.style.display = "block";
 
-    nipple(e)
+    nipple(e);
 
     nippleSecondImage.addEventListener('animationend', e => {
-
-        console.log("hello")
 
         nippleFirstImage.classList.remove('roll-out-first-nipple')
 
@@ -184,8 +182,8 @@ function nippleRemove(e){
         nippleSecondImage.parentNode.replaceChild(newtwo, nippleSecondImage);
         nippleSecondImage = newtwo;
 
-        nippleFirstImage.src = "img/posts/nipple_2.png";
-        nippleSecondImage.src = "img/posts/nipple_1.png";
+        nippleFirstImage.src = "img/posts/nipple_1.png";
+        nippleSecondImage.src = "img/posts/nipple_2.png";
 
         nippleFirstImage.style.display = "block";
         nippleSecondImage.style.display = "none";

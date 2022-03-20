@@ -430,7 +430,7 @@ body {
   }
 }
 
-.post-image-wrapper{
+#crop .post-image-wrapper{
   display: flex;
   justify-content: center;
   align-content: center;
@@ -504,6 +504,7 @@ body {
   display: grid;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
 #nipple .post-image {
@@ -511,7 +512,6 @@ body {
   grid-row: 1;
   object-fit: contain;
   height: 80%;
-  position: relative;
 }
 
 #nipple .second-post-image {
@@ -520,60 +520,43 @@ body {
   object-fit: contain;
   height: 80%;
   display: none;
-  position: relative;
   width: 100%;
 }
 
 .roll-out-first-nipple{
-  animation-name: move-left, roll-left;
+  animation-name: roll-out;
   animation-duration: 5s;
   animation-timing-function: linear;
+  animation-fill-mode: forwards;
 }
 
 .roll-in-second-nipple{
-  animation-name: move-right, roll-right;
+  animation-name: roll-in;
   animation-duration: 5s;
   animation-timing-function: linear;
   animation-direction: reverse;
+  animation-fill-mode: forwards;
 }
 
-@keyframes roll-left {
+@keyframes roll-out {
   from {
-    transform: rotate(0deg);
+    transform: translateX(0) rotate(0deg);
   }
   to {
-    transform: rotate(-500deg);
+    transform: translateX(calc(-50vw - 500px)) rotate(-500deg);
   }
 }
 
 
-@keyframes move-left{
+@keyframes roll-in {
   from {
-    left: 0px;
+    transform: translateX(0) rotate(0deg);
   }
   to {
-    left: calc(-50vw - 500px);
+    transform: translateX(calc(50vw + 500px)) rotate(500deg);
   }
 }
 
-@keyframes roll-right {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(500deg);
-  }
-}
-
-
-@keyframes move-right{
-  from {
-    left: 0px;
-  }
-  to {
-    left: calc(50vw + 500px);
-  }
-}
 
 @media only screen and (max-width: 1100px) {
   .right-col,
