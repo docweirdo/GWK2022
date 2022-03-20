@@ -74,7 +74,7 @@ body {
 
 .main {
   width: 100%;
-  padding: 40px 0;
+  padding-top: 40px;
   display: flex;
   justify-content: center;
   margin-top: 50px;
@@ -91,6 +91,14 @@ body {
 .left-col {
   display: flex;
   flex-direction: column;
+}
+
+.footer {
+  padding: 20px 0 10px 0;
+  font-size: 12px;
+  display: flex;
+  justify-content: space-around;
+  color: gray;
 }
 
 .status-wrapper {
@@ -505,7 +513,9 @@ body {
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  height: max-content;
 }
+
 
 #nipple .post-image {
   grid-column: 1;
