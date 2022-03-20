@@ -145,21 +145,23 @@ saveButton.forEach(button => {
 });
 
 
-shave('#altText .description-text', 40, { character: '... more' });
-const altTextCommentExpand = document.querySelector("#altText .js-shave-char")
-altTextCommentExpand.addEventListener('click', e => {
-    altTextCommentExpand.style.display = "none";
-    altTextCommentExpand.nextSibling.removeAttribute("style");
-    e.stopPropagation();
-}, {'once': true})
+var descriptionTexts = document.querySelectorAll(".description-text");
 
-shave('#crop .description-text', 40, { character: '... more' });
-const cropCommentExpand = document.querySelector("#crop .js-shave-char")
-cropCommentExpand.addEventListener('click', e => {
-    cropCommentExpand.style.display = "none";
-    cropCommentExpand.nextSibling.removeAttribute("style");
-    e.stopPropagation();
-}, {'once': true})
+shave(descriptionTexts, 40, { character: '... more' });
+
+descriptionTexts.forEach(dt => {
+
+    const dtExpand = dt.querySelector(".js-shave-char")
+    
+    if (!dtExpand) {return;}
+
+    dtExpand.addEventListener('click', e => {
+        dtExpand.style.display = "none";
+        dtExpand.nextSibling.removeAttribute("style");
+        e.stopPropagation();
+    }, {'once': true})
+
+});
 
 
 
