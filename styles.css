@@ -72,6 +72,7 @@ body {
 
 a, a:visited, a:focus, a:hover, a:-webkit-any-link{
   text-decoration: none !important;
+  color: inherit;
 }
 
 /* ---- */
@@ -155,6 +156,7 @@ a, a:visited, a:focus, a:hover, a:-webkit-any-link{
   overflow: hidden;
   text-align: center;
   font-size: 12px;
+  font-weight: 500;
   margin-top: 5px;
   color: rgba(0, 0, 0, 0.5);
 }
@@ -337,8 +339,12 @@ a, a:visited, a:focus, a:hover, a:-webkit-any-link{
   color: #000;
 }
 
-.profile-card .logged-in {
+.profile-card p {
   text-align: left;
+}
+
+.profile-card div{
+  width: 200px;
 }
 
 .sub-text {
@@ -418,13 +424,13 @@ a, a:visited, a:focus, a:hover, a:-webkit-any-link{
   align-items: center;
   z-index: 100;
   animation-name: altTextAnimation;
-  animation-duration: 5s;
+  animation-duration: 3s;
   animation-delay: 3s;
   animation-fill-mode: forwards;
 }
 
 #altTextText {
-  text-align: justify;
+  text-align: start;
   font-weight: 800;
   font-size: 2em; 
   max-width: min(calc(100vw - 100px), 500px);
@@ -433,9 +439,6 @@ a, a:visited, a:focus, a:hover, a:-webkit-any-link{
 @keyframes altTextAnimation {
   0% {
     color: black;
-  }
-  50% {
-    color:white;
   }
   100%{
     color:white;
