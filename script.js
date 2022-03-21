@@ -222,10 +222,10 @@ descriptionTexts.forEach(dt => {
             nipplePost.querySelector(".description-text").innerHTML = "\
             Among the community guidelines reglementing nudity on for example Facebook and Instagram is a ban on pictures of real, naked adults \
             if they include genitalia. What these guidelines explicitly include in their prohibition is the display of female nipples, \
-            with some exceptions like a connection to a medical context or child birth. Male nipples do not fall under the \
+            with some exceptions like a connection to a medical context, child birth or protest. Male nipples do not fall under the \
             restrictions imposed by the definition of nudity and sexual behaviour. This distinction by two of the most prominent social platforms \
             resulting in a ban of nipples based on the assumend gender of the depicted person has spiked criticism within the community \
-            and from social activists. Since 2012, the <span style='color: #00376b'>#FreeTheNipple</span> campaign exists in opposition to these platforms' policies, \
+            and from social activists. Since 2012, the <a href='https://www.instagram.com/freethenipple' style='color: #00376b'>#FreeTheNipple</a> campaign exists in opposition to these platforms' policies, \
             featuring prominent supporters like Miley Cyrus or Chrissy Teigen. Criticism includes the effectively imposed censorship on artist's \
             creativity and the unequal and arbitrarily defined treatment of genders. These pictures were taken from the Instragram account \
             <a href='https://www.instagram.com/genderless_nipples' style='color: #00376b'>@genderless_nipples</a>, a project aimed at challenging the identification of nipples as male or female and the \
