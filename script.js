@@ -2,6 +2,7 @@ const altTextPost = document.getElementById("altText");
 const skinPost = document.getElementById("skin");
 const cropPost = document.getElementById("crop");
 const nipplePost = document.getElementById("nipple");
+const adPost = document.getElementById("ad");
 const overlay = document.getElementById("altTextOverlay");
 const saveButton = document.querySelectorAll(".save");
 
@@ -192,6 +193,17 @@ function nippleRemove(e){
 
 }
 
+function ad(e) {
+    adPost.querySelector(".post-image-wrapper").classList.toggle("baby-shower");
+
+    postImage = adPost.querySelector(".post-image");
+
+    if (postImage.src.endsWith("img/posts/dollar.jpg"))
+        postImage.src = postImage.src.replace("jpg", "png");
+    else 
+        postImage.src = postImage.src.replace("png", "jpg");
+}
+
 // Click Listeners for each save post icon
 saveButton.forEach(button => {
     button.addEventListener('click', e => {
@@ -244,10 +256,12 @@ descriptionTexts.forEach(dt => {
 
 });
 
-
+// Prefetch Dollar.png
+(new Image()).src = "img/posts/dollar.png";
 
 
 addPostLikeListener(altTextPost, altText, () => {})
 addPostLikeListener(cropPost, crop, cropRemove)
 addPostLikeListener(skinPost, skin, skinRemove)
 addPostLikeListener(nipplePost, nipple, nippleRemove)
+addPostLikeListener(adPost, ad, ad);
