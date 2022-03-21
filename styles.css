@@ -70,6 +70,10 @@ body {
   background-size: cover;
 }
 
+a, a:visited, a:focus, a:hover, a:-webkit-any-link{
+  text-decoration: none !important;
+}
+
 /* ---- */
 
 .main {
